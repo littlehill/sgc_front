@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import head from './img/head.png'
 import loading from './img/loading.gif'
@@ -69,16 +69,44 @@ const sendCommand = async (
 	}
 }
 
+type KeyListener = (key: string) => void
+
+const registerKeyListener = (keyListener: KeyListener): void => {
+	document.addEventListener('keydown', (event) => keyListener(event.code))
+}
+
 const App: React.FC<Props> = ({ apiUrl }) => {
 	const [text, setText] = useState('')
 	const [command, setCommand] = useState('')
 	const [commandResult, setCommandResult] = useState('')
 
-	const refreshInfo = () => {
+	const refreshInfo = useCallback((): void => {
 		loadInfo(apiUrl).then((text) => setText(text))
-	}
+	}, [apiUrl])
 
-	useEffect(refreshInfo, [apiUrl])
+	const handleKeypress = useCallback(
+		(key: string): void => {
+			switch (key) {
+				case 'KeyG':
+					turnOnGreen(apiUrl)
+					break
+				case 'KeyR':
+					turnOnRed(apiUrl)
+					break
+				case 'KeyQ':
+					turnOff(apiUrl)
+					break
+				default:
+				// Ignore key press on purpose
+			}
+		},
+		[apiUrl]
+	)
+
+	useEffect(() => {
+		registerKeyListener(handleKeypress)
+		refreshInfo()
+	}, [apiUrl, refreshInfo, handleKeypress])
 
 	const commandFormSubmit = (
 		event: React.FormEvent<HTMLFormElement>
@@ -103,13 +131,13 @@ const App: React.FC<Props> = ({ apiUrl }) => {
 				<p dangerouslySetInnerHTML={{ __html: text }} />
 				<Buttons>
 					<Button color="#4CAF50" onClick={() => turnOnGreen(apiUrl)}>
-						Green On
+						Green On (G)
 					</Button>
 					<Button color="#f44336" onClick={() => turnOnRed(apiUrl)}>
-						Red On
+						Red On (R)
 					</Button>
 					<Button color="#555555" onClick={() => turnOff(apiUrl)}>
-						Both Off
+						Both Off (Q)
 					</Button>
 				</Buttons>
 				<p>Command execution:</p>
