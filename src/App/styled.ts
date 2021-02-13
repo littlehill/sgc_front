@@ -27,6 +27,7 @@ export const Image = styled.img`
 
 export const Link = styled.a`
 	color: #61dafb;
+	margin: 0.5em;
 `
 
 export const Buttons = styled.div`
@@ -76,11 +77,7 @@ export const StyledCode = styled.code`
 	margin: 1em;
 `
 
-export const Info = styled.div`
-	display: flex;
-	align-items: center;
-`
-
 export const RefreshButton = styled(Button)`
+	font-size: 16px;
 	margin: 1em;
 `

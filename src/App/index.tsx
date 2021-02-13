@@ -9,7 +9,6 @@ import {
 	Header,
 	Image,
 	ImageContainer,
-	Info,
 	Link,
 	RefreshButton,
 	StyledApp,
@@ -98,19 +97,10 @@ const App: React.FC<Props> = ({ apiUrl }) => {
 					<Image src={head} alt="head" />
 					<Image src={loading} alt="loading" />
 				</ImageContainer>
-				<Link
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</Link>
-				<Info>
-					<p dangerouslySetInnerHTML={{ __html: text }} />
-					<RefreshButton color="#008CBA" onClick={refreshInfo}>
-						Refresh Info
-					</RefreshButton>
-				</Info>
+				<RefreshButton color="#008CBA" onClick={refreshInfo}>
+					Refresh Info
+				</RefreshButton>
+				<p dangerouslySetInnerHTML={{ __html: text }} />
 				<Buttons>
 					<Button color="#4CAF50" onClick={() => turnOnGreen(apiUrl)}>
 						Green On
@@ -134,6 +124,13 @@ const App: React.FC<Props> = ({ apiUrl }) => {
 				<StyledCode
 					dangerouslySetInnerHTML={{ __html: commandResult }}
 				/>
+				<Link
+					href="https://reactjs.org"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Learn React
+				</Link>
 			</Header>
 		</StyledApp>
 	)
