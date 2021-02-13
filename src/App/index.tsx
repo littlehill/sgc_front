@@ -143,6 +143,7 @@ const App: React.FC<Props> = ({ apiUrl }) => {
 				<p>Command execution:</p>
 				<CommandForm onSubmit={commandFormSubmit}>
 					<StyledInput
+						autoFocus={true}
 						onChange={({ target }) => setCommand(target.value)}
 					/>
 					<Button type="submit" color="#008CBA">
