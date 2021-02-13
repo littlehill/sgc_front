@@ -15,22 +15,14 @@ export const Header = styled.header`
 	background-color: #282c34;
 `
 
-export const Logo = styled.img`
+export const ImageContainer = styled.div`
+	display: flex;
+`
+
+export const Image = styled.img`
 	height: 20vmin;
 	pointer-events: none;
-
-	@keyframes App-logo-spin {
-		from {
-			transform: rotate(0deg);
-		}
-		to {
-			transform: rotate(360deg);
-		}
-	}
-
-	@media (prefers-reduced-motion: no-preference) {
-		animation: App-logo-spin infinite 20s linear;
-	}
+	margin: 1em;
 `
 
 export const Link = styled.a`
@@ -81,5 +73,14 @@ export const StyledInput = styled.input.attrs({
 
 export const StyledCode = styled.code`
 	font-size: 16px;
+	margin: 1em;
+`
+
+export const Info = styled.div`
+	display: flex;
+	align-items: center;
+`
+
+export const RefreshButton = styled(Button)`
 	margin: 1em;
 `

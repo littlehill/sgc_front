@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react'
 
-import logo from './logo.svg'
+import head from './img/head.png'
+import loading from './img/loading.gif'
 import {
 	Button,
 	Buttons,
 	CommandForm,
 	Header,
+	Image,
+	ImageContainer,
+	Info,
 	Link,
-	Logo,
+	RefreshButton,
 	StyledApp,
 	StyledCode,
 	StyledInput,
@@ -17,13 +21,13 @@ type Props = {
 	apiUrl: string
 }
 
-const loadTemperature = async (apiUrl: string): Promise<string> => {
+const loadInfo = async (apiUrl: string): Promise<string> => {
 	try {
-		const result = await fetch(`${apiUrl}/cgi-bin/test.cgi`)
+		const result = await fetch(`${apiUrl}/cgi-bin/welcome.cgi`)
 		return result.text()
 	} catch (error) {
 		console.error(error)
-		return 'Error loading CPU temperature...'
+		return 'Error loading info...'
 	}
 }
 
@@ -71,9 +75,11 @@ const App: React.FC<Props> = ({ apiUrl }) => {
 	const [command, setCommand] = useState('')
 	const [commandResult, setCommandResult] = useState('')
 
-	useEffect(() => {
-		loadTemperature(apiUrl).then((text) => setText(text))
-	}, [apiUrl])
+	const refreshInfo = () => {
+		loadInfo(apiUrl).then((text) => setText(text))
+	}
+
+	useEffect(refreshInfo, [apiUrl])
 
 	const commandFormSubmit = (
 		event: React.FormEvent<HTMLFormElement>
@@ -88,8 +94,10 @@ const App: React.FC<Props> = ({ apiUrl }) => {
 	return (
 		<StyledApp>
 			<Header>
-				<Logo src={logo} alt="logo" />
-				<p>{text}</p>
+				<ImageContainer>
+					<Image src={head} alt="head" />
+					<Image src={loading} alt="loading" />
+				</ImageContainer>
 				<Link
 					href="https://reactjs.org"
 					target="_blank"
@@ -97,6 +105,12 @@ const App: React.FC<Props> = ({ apiUrl }) => {
 				>
 					Learn React
 				</Link>
+				<Info>
+					<p dangerouslySetInnerHTML={{ __html: text }} />
+					<RefreshButton color="#008CBA" onClick={refreshInfo}>
+						Refresh Info
+					</RefreshButton>
+				</Info>
 				<Buttons>
 					<Button color="#4CAF50" onClick={() => turnOnGreen(apiUrl)}>
 						Green On
