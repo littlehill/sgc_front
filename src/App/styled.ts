@@ -16,7 +16,7 @@ export const Header = styled.header`
 `
 
 export const Logo = styled.img`
-	height: 40vmin;
+	height: 20vmin;
 	pointer-events: none;
 
 	@keyframes App-logo-spin {
@@ -63,4 +63,23 @@ export const Button = styled.button<ButtonProps>`
 		box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
 			0 17px 50px 0 rgba(0, 0, 0, 0.19);
 	}
+`
+
+export const CommandForm = styled.form`
+	display: flex;
+	justify-content: center;
+	width: 100%;
+`
+
+export const StyledInput = styled.input.attrs({
+	type: 'text',
+})`
+	font-size: 24px;
+	margin: 0 0.5em;
+	width: 50%;
+`
+
+export const StyledCode = styled.code`
+	font-size: 16px;
+	margin: 1em;
 `

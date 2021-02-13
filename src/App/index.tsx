@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from 'react'
 
 import logo from './logo.svg'
-import { Button, Buttons, Header, Link, Logo, StyledApp } from './styled'
+import {
+	Button,
+	Buttons,
+	CommandForm,
+	Header,
+	Link,
+	Logo,
+	StyledApp,
+	StyledCode,
+	StyledInput,
+} from './styled'
 
 type Props = {
 	apiUrl: string
@@ -41,12 +51,39 @@ const turnOff = async (apiUrl: string): Promise<void> => {
 	}
 }
 
+const sendCommand = async (
+	apiUrl: string,
+	command: string
+): Promise<string> => {
+	try {
+		const result = await fetch(
+			encodeURI(`${apiUrl}/cgi-bin/runparam.cgi?input=${command}`)
+		)
+		return result.text()
+	} catch (error) {
+		console.error(error)
+		return 'Unknown error while executing the command...'
+	}
+}
+
 const App: React.FC<Props> = ({ apiUrl }) => {
 	const [text, setText] = useState('')
+	const [command, setCommand] = useState('')
+	const [commandResult, setCommandResult] = useState('')
 
 	useEffect(() => {
 		loadTemperature(apiUrl).then((text) => setText(text))
 	}, [apiUrl])
+
+	const commandFormSubmit = (
+		event: React.FormEvent<HTMLFormElement>
+	): void => {
+		event.preventDefault()
+		sendCommand(apiUrl, command).then((result) => {
+			setCommandResult(result)
+			setCommand('')
+		})
+	}
 
 	return (
 		<StyledApp>
@@ -71,6 +108,18 @@ const App: React.FC<Props> = ({ apiUrl }) => {
 						Both Off
 					</Button>
 				</Buttons>
+				<p>Command execution:</p>
+				<CommandForm onSubmit={commandFormSubmit}>
+					<StyledInput
+						onChange={({ target }) => setCommand(target.value)}
+					/>
+					<Button type="submit" color="#008CBA">
+						Execute
+					</Button>
+				</CommandForm>
+				<StyledCode
+					dangerouslySetInnerHTML={{ __html: commandResult }}
+				/>
 			</Header>
 		</StyledApp>
 	)
