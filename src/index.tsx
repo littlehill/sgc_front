@@ -5,10 +5,12 @@ import App from './App'
 import { GlobalStyles } from './styled'
 import reportWebVitals from './utils/reportWebVitals'
 
+const API_URL = `${window.location.protocol}//${window.location.hostname}`
+
 ReactDOM.render(
 	<React.StrictMode>
 		<GlobalStyles />
-		<App />
+		<App apiUrl={API_URL} />
 	</React.StrictMode>,
 	document.getElementById('root')
 )
