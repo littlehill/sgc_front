@@ -1,64 +1,72 @@
 {
-  "name": "sgc_front",
-  "version": "0.1.0",
-  "description": "Frontend for the Server Garden caretaker project",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/littlehill/sgc_front"
-  },
-  "contributors": [
-    "Jindřich Máca (https://github.com/macajind)",
-    "Miroslav Kopecek (https://github.com/littlehill)"
-  ],
-  "license": "MIT",
-  "private": true,
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint src/",
-    "lint:fix": "eslint --fix src/"
-  },
-  "dependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "web-vitals": "^1.0.1"
-  },
-  "devDependencies": {
-    "@testing-library/dom": "^7.29.4",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.0.0",
-    "@typescript-eslint/parser": "^4.0.0",
-    "babel-eslint": "^10.0.0",
-    "eslint": "^7.5.0",
-    "eslint-config-react-app": "^6.0.0",
-    "eslint-plugin-flowtype": "^5.2.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jest": "^24.0.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.20.3",
-    "eslint-plugin-react-hooks": "^4.0.8",
-    "eslint-plugin-testing-library": "^3.10.1",
-    "react-scripts": "4.0.2",
-    "typescript": "^4.1.2"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+	"name": "sgc_front",
+	"version": "0.1.0",
+	"description": "Frontend for the Server Garden caretaker project",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/littlehill/sgc_front"
+	},
+	"contributors": [
+		"Jindřich Máca (https://github.com/macajind)",
+		"Miroslav Kopecek (https://github.com/littlehill)"
+	],
+	"license": "MIT",
+	"private": true,
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"lint": "eslint src/",
+		"lint:fix": "eslint --fix src/",
+		"prettier": "prettier --check .",
+		"prettier:fix": "prettier --write .",
+		"tsc:check": "tsc --noemit -p tsconfig.json",
+		"code:check": "npm-run-all -l -p tsc:check lint prettier",
+		"code:fix": "npm-run-all -l -p lint:fix prettier:fix"
+	},
+	"dependencies": {
+		"react": "^17.0.1",
+		"react-dom": "^17.0.1",
+		"web-vitals": "^1.0.1"
+	},
+	"devDependencies": {
+		"@testing-library/dom": "^7.29.4",
+		"@testing-library/jest-dom": "^5.11.4",
+		"@testing-library/react": "^11.1.0",
+		"@testing-library/user-event": "^12.1.10",
+		"@types/jest": "^26.0.15",
+		"@types/node": "^12.0.0",
+		"@types/react": "^17.0.0",
+		"@types/react-dom": "^17.0.0",
+		"@typescript-eslint/eslint-plugin": "^4.0.0",
+		"@typescript-eslint/parser": "^4.0.0",
+		"babel-eslint": "^10.0.0",
+		"eslint": "^7.5.0",
+		"eslint-config-prettier": "^7.1.0",
+		"eslint-config-react-app": "^6.0.0",
+		"eslint-plugin-flowtype": "^5.2.0",
+		"eslint-plugin-import": "^2.22.0",
+		"eslint-plugin-jest": "^24.0.0",
+		"eslint-plugin-jsx-a11y": "^6.3.1",
+		"eslint-plugin-react": "^7.20.3",
+		"eslint-plugin-react-hooks": "^4.0.8",
+		"eslint-plugin-testing-library": "^3.10.1",
+		"npm-run-all": "^4.1.5",
+		"prettier": "^2.2.1",
+		"react-scripts": "4.0.2",
+		"typescript": "^4.1.2"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 }
